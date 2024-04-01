@@ -1,4 +1,47 @@
 // transactionProcessor.js
+/**
+ * Main entry point for processing transactions with enhanced error handling.
+ * This function attempts to process a batch of transactions and handles any errors that occur.
+ * @param {Array} transactions - An array of transaction details to be processed.
+ */
+async function mainProcessTransactions(transactions) {
+  try {
+    await processTransactions(transactions);
+  } catch (error) {
+    console.error('An unexpected error occurred during transaction processing:', error.message);
+    // Notify stakeholders about the system error
+    transactions.forEach(transaction => {
+      notifyStakeholders([
+        transaction.senderEmail,
+        transaction.receiverEmail
+      ], 'Transaction Processing Error', 'An unexpected error occurred during the processing of your transaction. Our team is working to resolve the issue. Please try again later.');
+    });
+  }
+}
+
+/**
+ // Enhanced error handling is implemented within the processTransactions and safeProcessTransactions functions.
+ * Enhanced error handling for transaction processing.
+ * This function wraps the processTransactions function to handle any uncaught errors
+ * and ensure a graceful degradation of service.
+ * @param {Array} transactions - An array of transaction details to be processed.
+ */
+async function safeProcessTransactions(transactions) {
+  console.log(`Starting to process ${transactions.length} transactions.`);
+  try {
+    await processTransactions(transactions);
+  } catch (error) {
+    console.error('An unexpected error occurred during transaction processing:', error.message);
+    // Notify stakeholders about the system error
+    transactions.forEach(transaction => {
+      notifyStakeholders([
+        transaction.senderEmail,
+        transaction.receiverEmail
+      ], 'Transaction Processing Error', 'An unexpected error occurred during the processing of your transaction. Our team is working to resolve the issue. Please try again later.');
+    });
+  }
+}
+
 
 /**
  * Module for processing L2L RD transactions, including initiating, monitoring, and verifying transactions.

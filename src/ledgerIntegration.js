@@ -20,22 +20,23 @@ const ledgerApiConfig = {
  * @param {Object} transactionDetails - The details of the transaction, including amount, sender, and receiver.
  * @returns {Promise} A promise that resolves with the transaction result.
  */
-function executeL2LRDTransaction(transactionDetails) {
+async function executeL2LRDTransaction(transactionDetails) {
   const { sendLedgerUrl, apiKey } = ledgerApiConfig;
   const headers = {
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${apiKey}`,
   };
 
-  return axios.post(sendLedgerUrl, transactionDetails, { headers })
-    .then(response => {
-      console.log('Transaction successful:', response.data);
-      return response.data;
-    })
-    .catch(error => {
-      console.error('Transaction failed:', error.response ? error.response.data : error.message);
-      throw error;
-    });
+  // Add a try-catch block around the axios call in the executeL2LRDTransaction function
+  try {
+    const response = await axios.post(sendLedgerUrl, transactionDetails, { headers });
+    console.log('Transaction successful:', response.data);
+    return response.data;
+  } catch (error) {
+    console.error('Transaction failed:', error.response ? error.response.data : error.message);
+    // Implement additional error handling logic here
+    throw error; // Rethrow the error after handling it
+  }
 }
 
 /**
