@@ -1,4 +1,12 @@
 #!/bin/bash
+# Configuring Git to use credentials from .env for the current session
+configure_git_credentials() {
+    echo "Configuring Git to use provided credentials..."
+    git config --global user.token "$GH_TOKEN"
+    git config --global user.name "$GH_USER"
+    echo "Git configured with user name and token from .env file."
+}
+
 set -e # Exit immediately if a command exits with a non-zero status.
 
 # Automatically export all variables
