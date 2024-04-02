@@ -18,17 +18,15 @@ async function compileTransactionDetails(transactions, deedOfAssignment) {
   const filingConfirmation = await submitUccFiling(uccFilingDetails);
 
   // Assuming filingConfirmation contains a filingId that needs to be included in each transaction
-  const compiledDetails = transactions.map(transaction => {
-    return {
-      ...transaction,
-      filingId: filingConfirmation.filingId, // Add the UCC filing ID to each transaction
-      deedOfAssignmentDetails: {
-        assignor: deedOfAssignment.assignor,
-        assignee: deedOfAssignment.assignee,
-        rightsOrInterests: deedOfAssignment.rightsOrInterests,
-      },
-    };
-  });
+  const compiledDetails = transactions.map((transaction) => ({
+    ...transaction,
+    filingId: filingConfirmation.filingId, // Add the UCC filing ID to each transaction
+    deedOfAssignmentDetails: {
+      assignor: deedOfAssignment.assignor,
+      assignee: deedOfAssignment.assignee,
+      rightsOrInterests: deedOfAssignment.rightsOrInterests,
+    },
+  }));
 
   return compiledDetails;
 }

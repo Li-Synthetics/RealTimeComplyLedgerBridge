@@ -10,10 +10,10 @@ async function mainProcessTransactions(transactions) {
   } catch (error) {
     console.error('An unexpected error occurred during transaction processing:', error.message);
     // Notify stakeholders about the system error
-    transactions.forEach(transaction => {
+    transactions.forEach((transaction) => {
       notifyStakeholders([
         transaction.senderEmail,
-        transaction.receiverEmail
+        transaction.receiverEmail,
       ], 'Transaction Processing Error', 'An unexpected error occurred during the processing of your transaction. Our team is working to resolve the issue. Please try again later.');
     });
   }
@@ -33,15 +33,14 @@ async function safeProcessTransactions(transactions) {
   } catch (error) {
     console.error('An unexpected error occurred during transaction processing:', error.message);
     // Notify stakeholders about the system error
-    transactions.forEach(transaction => {
+    transactions.forEach((transaction) => {
       notifyStakeholders([
         transaction.senderEmail,
-        transaction.receiverEmail
+        transaction.receiverEmail,
       ], 'Transaction Processing Error', 'An unexpected error occurred during the processing of your transaction. Our team is working to resolve the issue. Please try again later.');
     });
   }
 }
-
 
 /**
  * Module for processing L2L RD transactions, including initiating, monitoring, and verifying transactions.
@@ -57,7 +56,7 @@ const { notifyStakeholders } = require('./components/stakeholderCommunication');
  * @param {Array} transactions - An array of transaction details to be processed.
  */
 async function processTransactions(transactions) {
-  for (let transaction of transactions) {
+  for (const transaction of transactions) {
     try {
       // Execute the L2L RD transaction
       const transactionResult = await executeL2LRDTransaction(transaction);
@@ -66,16 +65,15 @@ async function processTransactions(transactions) {
       // Notify stakeholders about the successful transaction
       notifyStakeholders([
         transaction.senderEmail,
-        transaction.receiverEmail
+        transaction.receiverEmail,
       ], 'Transaction Processed', `Your transaction with ID: ${transactionResult.transactionId} has been successfully processed.`);
-
     } catch (error) {
       console.error(`Failed to process transaction for ${transaction.amount} to ${transaction.receiver}:`, error.message);
 
       // Notify stakeholders about the failed transaction
       notifyStakeholders([
         transaction.senderEmail,
-        transaction.receiverEmail
+        transaction.receiverEmail,
       ], 'Transaction Failed', `Your transaction to ${transaction.receiver} has failed. Please contact support.`);
     }
   }
@@ -89,7 +87,7 @@ function initiateTransactionProcessing(transactions) {
   console.log('Initiating L2L RD transaction processing...');
   processTransactions(transactions)
     .then(() => console.log('All transactions have been processed.'))
-    .catch(error => console.error('An error occurred during transaction processing:', error));
+    .catch((error) => console.error('An error occurred during transaction processing:', error));
 }
 
 module.exports = { initiateTransactionProcessing };

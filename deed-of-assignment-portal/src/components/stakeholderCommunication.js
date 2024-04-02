@@ -12,8 +12,8 @@ const transporter = nodemailer.createTransport({
   service: 'gmail', // Example using Gmail; adjust according to project needs
   auth: {
     user: 'yourEmail@example.com',
-    pass: 'yourPassword'
-  }
+    pass: 'yourPassword',
+  },
 });
 
 /**
@@ -26,15 +26,15 @@ function sendEmail(email, subject, message) {
   const mailOptions = {
     from: 'yourEmail@example.com',
     to: email,
-    subject: subject,
-    text: message
+    subject,
+    text: message,
   };
 
-  transporter.sendMail(mailOptions, function(error, info){
+  transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       console.log('Error sending email: ', error);
     } else {
-      console.log('Email sent: ' + info.response);
+      console.log(`Email sent: ${info.response}`);
     }
   });
 }
@@ -44,14 +44,14 @@ function sendEmail(email, subject, message) {
  * @param {Array} stakeholders - An array of stakeholder email addresses.
  */
 function notifyStakeholders(stakeholders) {
-  stakeholders.forEach(email => {
+  stakeholders.forEach((email) => {
     const subject = 'L2L RD Process Initiation and Progress Update';
-    const message = 'Dear Stakeholder, \n\n' +
-                    'We are pleased to inform you that the Ledger to Ledger Rail Deposit (L2L RD) process has been initiated. ' +
-                    'You will receive updates on the progress of the transactions. \n\n' +
-                    'Thank you for your cooperation. \n\n' +
-                    'Best Regards, \n' +
-                    'The L2L RD Team';
+    const message = 'Dear Stakeholder, \n\n'
+                    + 'We are pleased to inform you that the Ledger to Ledger Rail Deposit (L2L RD) process has been initiated. '
+                    + 'You will receive updates on the progress of the transactions. \n\n'
+                    + 'Thank you for your cooperation. \n\n'
+                    + 'Best Regards, \n'
+                    + 'The L2L RD Team';
     sendEmail(email, subject, message);
   });
 }

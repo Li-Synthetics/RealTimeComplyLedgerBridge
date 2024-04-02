@@ -22,7 +22,7 @@ function recordReview(reviewDetails) {
       console.error('Error reading review data file:', err);
       return;
     }
-    let reviews = JSON.parse(data);
+    const reviews = JSON.parse(data);
     reviews.push(reviewDetails);
     fs.writeFile(reviewDataPath, JSON.stringify(reviews, null, 2), (err) => {
       if (err) {
@@ -44,7 +44,7 @@ function collectFeedback(feedback) {
       console.error('Error reading feedback data file:', err);
       return;
     }
-    let feedbacks = JSON.parse(data);
+    const feedbacks = JSON.parse(data);
     feedbacks.push(feedback);
     fs.writeFile(feedbackDataPath, JSON.stringify(feedbacks, null, 2), (err) => {
       if (err) {

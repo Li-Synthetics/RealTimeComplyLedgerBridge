@@ -14,25 +14,25 @@ const risks = [
   {
     name: 'Technical Failure',
     description: 'Failure in the ledger integration or transaction processing systems.',
-    mitigation: 'Implement redundant systems and regular backup procedures.'
+    mitigation: 'Implement redundant systems and regular backup procedures.',
   },
   {
     name: 'Compliance Issues',
     description: 'Failure to comply with legal and regulatory requirements.',
-    mitigation: 'Regular compliance audits and legal consultations.'
+    mitigation: 'Regular compliance audits and legal consultations.',
   },
   {
     name: 'Settlement Delays',
     description: 'Delays in the real-time settlement of transactions.',
-    mitigation: 'Monitor transactions in real-time and have contingency plans for manual intervention.'
-  }
+    mitigation: 'Monitor transactions in real-time and have contingency plans for manual intervention.',
+  },
 ];
 
 /**
  * Function to implement mitigation strategies for identified risks.
  */
 function implementMitigationStrategies() {
-  risks.forEach(risk => {
+  risks.forEach((risk) => {
     console.log(`Mitigating risk: ${risk.name}`);
     switch (risk.name) {
       case 'Technical Failure':
@@ -58,12 +58,12 @@ function implementMitigationStrategies() {
  * Function to notify stakeholders of identified risks and the mitigation strategies being implemented.
  */
 function notifyRisksAndMitigations() {
-  risks.forEach(risk => {
+  risks.forEach((risk) => {
     notifyStakeholders(['admin@institution.com'], 'Risk Notification', `Risk identified: ${risk.name}. Mitigation strategy: ${risk.mitigation}`);
   });
 }
 
 module.exports = {
   implementMitigationStrategies,
-  notifyRisksAndMitigations
+  notifyRisksAndMitigations,
 };

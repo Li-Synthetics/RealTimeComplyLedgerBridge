@@ -34,7 +34,7 @@ function storeImprovementPlan(improvementPlan) {
       console.error('Error reading improvement plan data file:', err);
       return;
     }
-    let plans = JSON.parse(data);
+    const plans = JSON.parse(data);
     plans.push(improvementPlan);
     fs.writeFile(improvementPlanPath, JSON.stringify(plans, null, 2), (err) => {
       if (err) {

@@ -1,32 +1,35 @@
 {
   "name": "deed-of-assignment-portal",
   "version": "0.1.0",
+  "type": "module",
   "private": true,
   "dependencies": {
-    "@babel/plugin-transform-class-properties": "^7.24.1",
-    "@babel/plugin-transform-nullish-coalescing-operator": "^7.24.1",
-    "@babel/plugin-transform-numeric-separator": "^7.24.1",
-    "@babel/plugin-transform-optional-chaining": "^7.24.1",
-    "@babel/plugin-transform-private-methods": "^7.24.1",
-    "@jridgewell/sourcemap-codec": "^1.4.15",
-    "@rollup/plugin-terser": "^0.4.4",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.6.8",
     "cookie-parser": "^1.4.6",
-    "csurf": "^1.11.0",
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "express-rate-limit": "^7.2.0",
     "helmet": "^7.1.0",
     "morgan": "^1.10.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.22.3",
     "react-scripts": "^5.0.1",
+    "uuid": "^7.0.3",
     "web-vitals": "^2.1.4",
     "whatwg-fetch": "^3.6.20"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.18.0",
+    "@babel/plugin-transform-class-properties": "^7.24.1",
+    "@babel/plugin-transform-nullish-coalescing-operator": "^7.24.1",
+    "@babel/plugin-transform-numeric-separator": "^7.24.1",
+    "@babel/plugin-transform-optional-chaining": "^7.24.1",
+    "@babel/plugin-transform-private-methods": "^7.24.1",
+    "@babel/plugin-transform-private-property-in-object": "^7.24.1",
+    "@jridgewell/sourcemap-codec": "^1.4.15",
+    "@rollup/plugin-terser": "^0.4.4",
     "@testing-library/react": "^14.2.2",
     "eslint": "^8.57.0",
     "eslint-config-airbnb": "^19.0.4",
@@ -34,14 +37,17 @@
     "eslint-plugin-jsx-a11y": "^6.8.0",
     "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "jest": "^27.5.1"
+    "jest": "^27.5.1",
+    "svgo": "^2.8.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "jest": "jest",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint 'src/**/*.{js,jsx}' --quiet",
+    "lint:fix": "eslint 'src/**/*.{js,jsx}' --fix"
   },
   "eslintConfig": {
     "extends": [
@@ -52,6 +58,20 @@
   "overrides": {
     "nth-check": "^2.0.1",
     "postcss": "^8.4.31"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ],
+    "plugins": [
+      "@babel/plugin-transform-class-properties",
+      "@babel/plugin-transform-nullish-coalescing-operator",
+      "@babel/plugin-transform-numeric-separator",
+      "@babel/plugin-transform-optional-chaining",
+      "@babel/plugin-transform-private-methods",
+      "@babel/plugin-transform-private-property-in-object"
+    ]
   },
   "browserslist": {
     "production": [

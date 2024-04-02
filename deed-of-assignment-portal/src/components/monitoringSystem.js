@@ -21,15 +21,15 @@ const monitoringApiConfig = {
 function monitorTransactionStatus(transactionId) {
   const { monitoringUrl, apiKey } = monitoringApiConfig;
   const headers = {
-    'Authorization': `Bearer ${apiKey}`,
+    Authorization: `Bearer ${apiKey}`,
   };
 
   return axios.get(`${monitoringUrl}/${transactionId}`, { headers })
-    .then(response => {
+    .then((response) => {
       console.log(`Monitoring result for transaction ID ${transactionId}:`, response.data);
       return response.data;
     })
-    .catch(error => {
+    .catch((error) => {
       console.error(`Error monitoring transaction ID ${transactionId}:`, error.response ? error.response.data : error.message);
       throw error;
     });
@@ -41,7 +41,7 @@ function monitorTransactionStatus(transactionId) {
  */
 async function initiateMonitoring(transactionIds) {
   console.log('Initiating real-time monitoring for L2L RD transactions...');
-  for (let transactionId of transactionIds) {
+  for (const transactionId of transactionIds) {
     try {
       const monitoringResult = await monitorTransactionStatus(transactionId);
       if (monitoringResult.status === 'completed') {
@@ -57,4 +57,3 @@ async function initiateMonitoring(transactionIds) {
 }
 
 module.exports = { initiateMonitoring };
-

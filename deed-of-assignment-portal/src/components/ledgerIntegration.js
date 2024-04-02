@@ -24,7 +24,7 @@ async function executeL2LRDTransaction(transactionDetails) {
   const { sendLedgerUrl, apiKey } = ledgerApiConfig;
   const headers = {
     'Content-Type': 'application/json',
-    'Authorization': `Bearer ${apiKey}`,
+    Authorization: `Bearer ${apiKey}`,
   };
 
   // Add a try-catch block around the axios call in the executeL2LRDTransaction function
@@ -47,7 +47,7 @@ async function executeL2LRDTransaction(transactionDetails) {
 function verifyLedgerCompatibility() {
   const { sendLedgerUrl, receiveLedgerUrl, apiKey } = ledgerApiConfig;
   const headers = {
-    'Authorization': `Bearer ${apiKey}`,
+    Authorization: `Bearer ${apiKey}`,
   };
 
   // Check sending ledger
@@ -56,21 +56,19 @@ function verifyLedgerCompatibility() {
   const receiveLedgerCheck = axios.get(`${receiveLedgerUrl}/compatibility`, { headers });
 
   return Promise.all([sendLedgerCheck, receiveLedgerCheck])
-    .then(responses => {
-      const allCompatible = responses.every(response => response.data.compatible);
+    .then((responses) => {
+      const allCompatible = responses.every((response) => response.data.compatible);
       if (allCompatible) {
         console.log('Both ledgers are compatible for L2L RD transactions.');
         return true;
-      } else {
-        console.error('One or both ledgers are not compatible for L2L RD transactions.');
-        return false;
       }
+      console.error('One or both ledgers are not compatible for L2L RD transactions.');
+      return false;
     })
-    .catch(error => {
+    .catch((error) => {
       console.error('Error verifying ledger compatibility:', error.response ? error.response.data : error.message);
       throw error;
     });
 }
 
 module.exports = { executeL2LRDTransaction, verifyLedgerCompatibility };
-

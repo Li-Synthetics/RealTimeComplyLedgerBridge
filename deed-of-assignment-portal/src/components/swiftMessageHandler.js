@@ -10,9 +10,11 @@
  * @returns {String} The formatted SWIFT MT103 message.
  */
 function generateMT103Message(transactionDetails) {
-    const { transactionReference, dateValue, currency, amount, senderAccount, receiverAccount, remittanceInformation } = transactionDetails;
-  
-    const mt103Message = `{1:F01YOURBANKXXXX0000000000}{2:I103RECEIVERBANKXXXXN}{3:{108:${transactionReference}}}
+  const {
+    transactionReference, dateValue, currency, amount, senderAccount, receiverAccount, remittanceInformation,
+  } = transactionDetails;
+
+  const mt103Message = `{1:F01YOURBANKXXXX0000000000}{2:I103RECEIVERBANKXXXXN}{3:{108:${transactionReference}}}
   {4:
   :20:${transactionReference}
   :23B:CRED
@@ -23,10 +25,10 @@ function generateMT103Message(transactionDetails) {
   :71A:OUR
   -}
   {5:{CHK:CHECKSUM}}`;
-  
-    return mt103Message;
-  }
-  
-  module.exports = {
-    generateMT103Message,
-  };
+
+  return mt103Message;
+}
+
+module.exports = {
+  generateMT103Message,
+};

@@ -29,7 +29,7 @@ function saveDocument(directory, fileName, content) {
 }
 
 // Ensure directories exist for all documentation paths
-Object.values(documentationPaths).forEach(directory => {
+Object.values(documentationPaths).forEach((directory) => {
   if (!fs.existsSync(directory)) {
     fs.mkdirSync(directory, { recursive: true });
     console.log(`Created directory: ${directory}`);
